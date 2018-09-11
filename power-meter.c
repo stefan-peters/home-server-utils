@@ -1,3 +1,5 @@
+// this file is based on the example from libsml!
+
 // Copyright 2011 Juri Glass, Mathias Runge, Nadim El Sayed
 // DAI-Labor, TU-Berlin
 //
