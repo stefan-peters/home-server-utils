@@ -1,0 +1,4 @@
+[submodule "libs/libsml"]
+	path = libs/libsml
+	url = https://github.com/volkszaehler/libsml
+	branch = master
