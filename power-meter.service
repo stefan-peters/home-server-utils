@@ -1,0 +1,13 @@
+[Unit]
+Description=Power Meter Service
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/tmp
+ExecStart=/opt/power-meter /dev/ttyUSB0
+Restart=on-failure # or always, on-abort, etc
+
+[Install]
+WantedBy=multi-user.target
