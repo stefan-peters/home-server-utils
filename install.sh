@@ -5,6 +5,12 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-make power-meter || exit(1)
-install -g dialup -m 776 power-meter /opt/power-meter
-install -g root -o root -m 744 power-meter.service 
+make power-meter
+
+install -g dialout -m 776 power-meter /opt/power-meter
+install -g root -o root -m 744 power-meter.service /etc/systemd/system
+systemctl daemon-reload
+systemctl start power-meter.service
+systemctl enable power-meter.service
+
+

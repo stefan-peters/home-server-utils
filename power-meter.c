@@ -82,7 +82,7 @@ int serial_port_open(const char* device) {
 	return fd;
 }
 
-const char* HOST = "localhost"; //"mqtt-broker.ionet";
+const char* HOST = "localhost";
 const int   PORT = 1883;
 
 typedef struct {
