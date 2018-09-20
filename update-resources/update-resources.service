@@ -1,0 +1,13 @@
+[Unit]
+Description=Update Resources Service
+After=influxdb.service
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/tmp
+ExecStart=python3 /opt/update-resources.py
+Restart=on-failure # or always, on-abort, etc
+
+[Install]
+WantedBy=multi-user.target

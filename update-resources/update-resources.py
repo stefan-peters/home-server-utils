@@ -14,13 +14,18 @@ def on_message(client, userdata, msg):
 
     json_body = [{"measurement": "power","fields": {}}]
 
-    if "current" in msg.topic:
-        value = re.search(r'\d+(\.\d+)?', msg.payload.decode("utf-8"))
-        json_body[0]["fields"]["current"] = float(value.group(0))
+    m = re.search(r'\d+(\.\d+)?', msg.payload.decode("utf-8"))
 
+    if not m:
+        return
+
+    value = float(m.group(0))
+
+    if "current" in msg.topic:    
+        json_body[0]["fields"]["current"] = value
     else:
-        value = re.search(r'\d+(\.\d+)?', msg.payload.decode("utf-8"))
-        json_body[0]["fields"]["total"] = round(float(value.group(0)) / 1000, 3)
+        # watts to kilowatt
+        json_body[0]["fields"]["total"] = round(value / 1000, 3)
 
     db.write_points(json_body)
 
