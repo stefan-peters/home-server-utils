@@ -1,15 +1,22 @@
 #!/usr/bin/python3
 
 import re
+import time
+import sys
 import paho.mqtt.client as mqtt
 from influxdb import InfluxDBClient
 
 def on_connect(client, userdata, flags, rc):
-    assert(rc == 0)
+
+    # wait and exit (and be restarted by systemd)
+    if rc != 0:
+        time.sleep(5)
+        sys.exit(2)
+
     print("Connected!")
     client.subscribe("resources/power/#")
 
-def on_message(client, userdata, msg):
+def on_message(client, db, msg):
     #print(msg.topic, msg.payload.decode('utf-8'))
 
     json_body = [{"measurement": "power","fields": {}}]
@@ -36,6 +43,8 @@ if __name__ == "__main__":
     client = mqtt.Client(userdata=db)
     client.on_connect = on_connect
     client.on_message = on_message
+
+    # ensure we are restarted by systemd
     client.on_disconnect = lambda x: sys.exit(1)
 
     client.connect("mqtt-broker.iotnet")
