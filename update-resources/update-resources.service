@@ -6,7 +6,7 @@ After=influxdb.service
 Type=simple
 User=pi
 WorkingDirectory=/tmp
-ExecStart=python3 /opt/update-resources.py
+ExecStart=/usr/bin/python3 /opt/update-resources.py
 Restart=on-failure # or always, on-abort, etc
 
 [Install]

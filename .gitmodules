@@ -2,3 +2,6 @@
 	path = libs/libsml
 	url = https://github.com/volkszaehler/libsml
 	branch = master
+[submodule "libs/python-lacrosse"]
+	path = libs/python-lacrosse
+	url = https://github.com/hthiery/python-lacrosse
